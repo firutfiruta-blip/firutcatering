@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="am" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ፍሩት ኬተሪንግ - Firut Catering</title>
+  <meta name="description" content="ፍሩት ኬተሪንግ - Firut Catering | ባህላዊ እና ዘመናዊ የኬተሪንግ አገልግሎት በከፍተኛ ጥራት">
+  <meta name="theme-color" content="#7c2d12">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Noto Sans Ethiopic', 'Noto Sans', 'Arial', 'sans-serif']
+          },
+          animation: {
+            'fade-up': 'fadeUp .7s ease-out both',
+            'fade-in': 'fadeIn .6s ease-out both',
+            'float': 'float 4s ease-in-out infinite',
+            'pulse-soft': 'pulseSoft 2.5s ease-in-out infinite'
+          },
+          keyframes: {
+            fadeUp: {
+              '0%': { opacity: '0', transform: 'translateY(25px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            },
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' }
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-8px)' }
+            },
+            pulseSoft: {
+              '0%, 100%': { transform: 'scale(1)' },
+              '50%': { transform: 'scale(1.04)' }
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <!-- Ethiopian-friendly font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* GLOBAL */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      font-family: "Noto Sans Ethiopic", "Noto Sans", Arial, sans-serif;
+      background: radial-gradient(circle at 20% 20%, rgba(154, 52, 18, .07) 0 1px, transparent 1px),
+                  radial-gradient(circle at 80% 70%, rgba(154, 52, 18, .05) 0 1px, transparent 1px),
+                  #fffaf5;
+      background-size: 24px 24px;
+    }
+
+    /* ETHIOPIAN PATTERN */
+    .ethiopian-pattern {
+      background-image: linear-gradient(135deg, rgba(154, 52, 18, .08) 25%, transparent 25%),
+                        linear-gradient(225deg, rgba(154, 52, 18, .08) 25%, transparent 25%);
+      background-position: 0 0, 12px 0;
+      background-size: 24px 24px;
+    }
+
+    /* GLASS EFFECT */
+    .glass {
+      background: rgba(255, 255, 255, .82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    /* MENU IMAGES (Aspect 16:9) */
+    .menu-image-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #fff7ed;
+    }
+    .menu-image {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+      transition: transform .7s cubic-bezier(.2, .8, .2, 1), filter .4s ease;
+    }
+    .menu-card:hover .menu-image {
+      transform: scale(1.025);
+    }
+    .image-contain {
+      object-fit: contain !important;
+      padding: 8px;
+    }
+
+    /* CARDS */
+    .menu-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid rgba(154, 52, 18, .14);
+      background: rgba(255, 255, 255, .92);
+      box-shadow: 0 10px 30px rgba(67, 20, 7, .07), 0 2px 8px rgba(67, 20, 7, .04);
+      transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    }
+    .menu-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(154, 52, 18, .35);
+      box-shadow: 0 20px 45px rgba(67, 20, 7, .13);
+    }
+
+    /* CATEGORY TABS */
+    .category-scroll {
+      scrollbar-width: thin;
+      scrollbar-color: #c2410c transparent;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+    }
+    .category-scroll::-webkit-scrollbar { height: 5px; }
+    .category-scroll::-webkit-scrollbar-track { background: transparent; }
+    .category-scroll::-webkit-scrollbar-thumb { background: #c2410c; border-radius: 999px; }
+    .menu-tab {
+      white-space: nowrap;
+      flex-shrink: 0;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      scroll-snap-align: center;
+      min-height: 46px;
+    }
+
+    /* SEARCH BAR */
+    .search-box {
+      transition: box-shadow .25s ease, border-color .25s ease, transform .25s ease;
+    }
+    .search-box:focus-within {
+      transform: translateY(-1px);
+      border-color: rgba(194, 65, 12, .65);
+      box-shadow: 0 0 0 4px rgba(194, 65, 12, .10), 0 10px 30px rgba(67, 20, 7, .08);
+    }
+
+    /* ETHIOPIAN DIVIDER LINE */
+    .ethiopian-line {
+      height: 4px;
+      background: linear-gradient(90deg, transparent, #7c2d12, #c2410c, #7c2d12, transparent);
+      border-radius: 999px;
+    }
+
+    /* BACK TO TOP */
+    #backToTop {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(15px);
+      transition: all .3s ease;
+    }
+    #backToTop.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    /* SEARCH EMPTY STATE */
+    .no-results {
+      animation: fadeUp .4s ease both;
+    }
+
+    /* FOOTER BUTTONS & LINKS */
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: .55rem .9rem;
+      border-radius: .7rem;
+      background: rgba(124, 45, 18, .6);
+      border: 1px solid rgba(251, 146, 60, .18);
+      color: #fed7aa;
+      font-size: .75rem;
+      font-weight: 700;
+      transition: all .25s ease;
+    }
+    .social-btn:hover {
+      background: rgba(194, 65, 12, .8);
+      transform: translateY(-2px);
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      color: #fed7aa;
+      font-weight: 700;
+      font-size: 1.05rem;
+      transition: all .25s ease;
+    }
+    .contact-link:hover {
+      color: #fb923c;
+      transform: translateX(-3px);
+    }
+    .contact-icon {
+      width: 2rem;
+      height: 2rem;
+      border-radius: .6rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(124, 45, 18, .65);
+      color: #fb923c;
+    }
+
+    /* DARK MODE STYLES */
+    html.dark body {
+      background: radial-gradient(circle at 20% 20%, rgba(194, 65, 12, .10) 0 1px, transparent 1px), #090706;
+      color: #ffedd5;
+    }
+    html.dark .glass {
+      background: rgba(20, 12, 8, .82);
+    }
+    html.dark .menu-card {
+      background: rgba(24, 14, 9, .94);
+      border-color: rgba(194, 65, 12, .22);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, .35);
+    }
+    html.dark .menu-card:hover {
+      border-color: rgba(251, 146, 60, .45);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .5);
+    }
+    html.dark .menu-image-wrapper {
+      background: #1c100a;
+    }
+    html.dark .search-box {
+      background: rgba(24, 14, 9, .92);
+      border-color: rgba(194, 65, 12, .3);
+    }
+
+    /* RESPONSIVE ADJUSTMENTS */
+    @media (max-width: 640px) {
+      .menu-image-wrapper { aspect-ratio: 16 / 9; border-radius: 18px; }
+      .menu-card { border-radius: 18px; }
+      .hero-title { line-height: 1.25; }
+      .menu-tab { padding-left: 14px; padding-right: 14px; }
+    }
+
+    /* REDUCED MOTION ACCESSIBILITY */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body class="text-gray-900 dark:text-orange-100 min-h-screen flex flex-col antialiased">
+
+  <!-- HEADER / HERO -->
+  <header class="relative overflow-hidden bg-gradient-to-br from-orange-950 via-orange-900 to-orange-800 dark:from-black dark:via-orange-950 dark:to-zinc-950 text-white shadow-2xl">
+    <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-orange-500/10 blur-2xl"></div>
+    <div class="absolute -bottom-32 -left-24 w-80 h-80 rounded-full bg-yellow-500/10 blur-3xl"></div>
+    <div class="absolute inset-0 ethiopian-pattern opacity-40"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-10 md:py-16">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-orange-300/20 backdrop-blur-md text-orange-100 text-xs sm:text-sm font-semibold mb-5 animate-fade-in">
+          <span class="w-2 h-2 rounded-full bg-orange-300 animate-pulse"></span>
+          ፍሩት ኬተሪንግ
+        </div>
+        <h1 class="hero-title text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-3 animate-fade-up">
+          ፍሩት ኬተሪንግ
+        </h1>
+        <p class="text-xl sm:text-2xl md:text-3xl font-semibold text-orange-200 mb-4 animate-fade-up">
+          Firut Catering
+        </p>
+        <div class="ethiopian-line max-w-xs mx-auto mb-5"></div>
+        <p class="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-orange-100/90 leading-7 animate-fade-up">
+          ባህላዊ እና ዘመናዊ የኬተሪንግ አገልግሎት በከፍተኛ ጥራት
+        </p>
+
+        <div class="mt-7 flex flex-col sm:flex-row justify-center gap-3 animate-fade-up">
+          <a href="https://wa.me/251934844547" target="_blank" rel="noopener noreferrer" class="inline-flex justify-center items-center gap-2 px-6 py-3 rounded-full bg-white text-orange-950 font-bold shadow-xl hover:scale-105 active:scale-95 transition-transform">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12.04 2C6.51 2 2.02 6.49 2.02 12.02c0 1.77.46 3.43 1.27 4.87L2 22l5.25-1.27a9.97 9.97 0 004.79 1.22h.01c5.53 0 10.02-4.49 10.02-10.02C22.07 6.49 17.57 2 12.04 2zm5.85 14.36c-.25.7-1.23 1.28-1.69 1.36-.43.08-.97.11-1.57-.1-.36-.12-.82-.27-1.41-.52-2.48-1.07-4.1-3.55-4.22-3.72-.12-.17-1.01-1.34-1.01-2.55 0-1.21.64-1.8.87-2.05.23-.25.5-.31.66-.31h.48c.15 0 .36-.06.56.43.2.48.69 1.68.75 1.81.06.12.1.27.02.44-.08.17-.12.27-.25.42-.12.15-.26.33-.37.44-.12.12-.25.25-.11.49.14.24.62 1.03 1.34 1.67.92.82 1.7 1.08 1.94 1.2.24.12.38.1.52-.06.14-.16.59-.69.75-.93.16-.24.32-.2.54-.12.22.08 1.41.66 1.65.78.24.12.4.18.46.28.06.1.06.57-.19 1.27z"/>
+            </svg>
+            WhatsApp
+          </a>
+          <button id="browseMenuBtn" type="button" class="inline-flex justify-center items-center gap-2 px-6 py-3 rounded-full bg-orange-700/60 hover:bg-orange-600/70 border border-orange-300/20 text-white font-bold backdrop-blur-md transition-all hover:scale-105 active:scale-95">
+            Browse Menu
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main id="menuArea" class="max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12 flex-grow w-full">
+    
+    <!-- SEARCH & THEME BAR -->
+    <section class="mb-7">
+      <div class="flex flex-col md:flex-row gap-3">
+        <div class="search-box relative flex-1 rounded-2xl border border-orange-200 dark:border-orange-900 bg-white/90 dark:bg-black/80 shadow-lg">
+          <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-orange-700 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-4.35-4.35m2.1-5.4a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z" />
+          </svg>
+          <input id="searchInput" type="search" autocomplete="off" spellcheck="false" placeholder="ምግብ ይፈልጉ... / Search food..." aria-label="Search food" class="w-full bg-transparent rounded-2xl pl-12 pr-12 py-4 outline-none text-sm sm:text-base text-gray-900 dark:text-orange-100 placeholder:text-gray-400 dark:placeholder:text-orange-300/40">
+          <button id="clearSearch" type="button" aria-label="Clear search" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-orange-100 dark:bg-orange-950 text-orange-800 dark:text-orange-300 hover:scale-105 transition">
+            ×
+          </button>
+        </div>
+        <button id="themeToggle" type="button" aria-label="Toggle dark mode" class="md:w-auto px-5 py-4 rounded-2xl border border-orange-200 dark:border-orange-900 bg-white dark:bg-black shadow-lg text-orange-900 dark:text-orange-300 font-bold flex items-center justify-center gap-2 hover:bg-orange-50 dark:hover:bg-orange-950 transition-all">
+          <span id="themeIcon">🌙</span>
+          <span id="themeText">Dark Mode</span>
+        </button>
+      </div>
+      <p id="searchStatus" class="mt-3 text-xs sm:text-sm text-orange-800 dark:text-orange-300/80 text-center hidden" aria-live="polite"></p>
+    </section>
+
+    <!-- CATEGORY TABS -->
+    <nav class="mb-7" aria-label="Menu Categories">
+      <div id="tab-container" class="category-scroll flex gap-2 overflow-x-auto pb-3 px-1" role="tablist" aria-label="Menu categories"></div>
+    </nav>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <article class="relative bg-white/90 dark:bg-black/80 backdrop-blur-sm rounded-3xl shadow-2xl border border-orange-200/80 dark:border-orange-950 p-4 sm:p-6 md:p-8">
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-1 rounded-b-full bg-gradient-to-r from-orange-900 via-orange-500 to-orange-900"></div>
+      <div id="content-container"></div>
+    </article>
+
+    <!-- SERVICE LOCATIONS -->
+    <aside class="mt-7 rounded-2xl p-5 text-center border border-orange-200 dark:border-orange-900 bg-gradient-to-r from-orange-50 via-white to-orange-50 dark:from-orange-950/30 dark:via-black dark:to-orange-950/30 shadow-lg">
+      <span class="font-bold text-orange-950 dark:text-orange-400">
+        የአገልግሎት ክልል (Service Locations):
+      </span>
+      <span class="block sm:inline text-orange-900 dark:text-orange-200 font-medium sm:ml-2 mt-1 sm:mt-0">
+        አዲስ አበባ (Addis Ababa) | ቢሾፍቱ (Bishoftu) | አዳማ (Adama)
+      </span>
+    </aside>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="relative overflow-hidden bg-orange-950 dark:bg-black text-orange-100 border-t-4 border-orange-900">
+    <div class="absolute inset-0 ethiopian-pattern opacity-20"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <h3 class="text-2xl font-bold text-orange-400 mb-3">
+          ፍሩት ኬተሪንግ
+          <span class="block text-lg text-orange-300/80">Firut Catering</span>
+        </h3>
+        <p class="text-sm text-orange-200/80 leading-7 max-w-xl mb-5">
+          ማንኛውንም የኬተሪንግ እና የባልትና ፍላጎትዎን በታማኝነት እና በፍጥነት እናቀርባለን።
+        </p>
+        <div class="flex flex-wrap gap-2">
+          <a href="https://wa.me/251934844547" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="social-btn">
+            WhatsApp
+          </a>
+          <a href="https://instagram.com/frutbelay" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-btn">
+            Instagram
+          </a>
+          <a href="https://tiktok.com/@feruta11" target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="social-btn">
+            TikTok
+          </a>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:items-end justify-center gap-3">
+        <a href="tel:251934844547" class="contact-link">
+          <span class="contact-icon">☎</span> +251 934 844 547
+        </a>
+        <a href="tel:251973704969" class="contact-link">
+          <span class="contact-icon">☎</span> +251 973 704 969
+        </a>
+        <a href="mailto:firutfiruta@gmail.com" class="contact-link text-base">
+          <span class="contact-icon">✉</span> firutfiruta@gmail.com
+        </a>
+      </div>
+    </div>
+    <div class="relative border-t border-orange-900 text-center py-4 text-xs text-orange-400/60">
+      &copy; Firut Catering. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP BUTTON -->
+  <button id="backToTop" type="button" aria-label="Back to top" class="fixed right-4 bottom-4 z-50 w-12 h-12 rounded-full bg-orange-800 hover:bg-orange-700 text-white shadow-2xl flex items-center justify-center">
+    ↑
+  </button>
+
+  <!-- APPLICATION LOGIC -->
+  <script>
+    const menuData = [
+      {
+        id: 'fasting-special',
+        tabTitle: 'የፆም ስፔሻል ኬተሪንግ',
+        title: 'የፆም ስፔሻል ኬተሪንግ (Ye Tsom Special Catering)',
+        subtitle: 'ከለስላሳ መጠጥ ጋር ይቀርባል (Served with soft drinks)',
+        image: 'fasting-special.png',
+        waText: 'ለዋጋ እና ትዕዛዝ - የፆም ስፔሻል ኬተሪንግ',
+        sections: [
+          {
+            title: 'ዋና ዋና የምግብ አይነቶች (Main Dishes)',
+            cols: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+            items: [
+              'ሽምብራ ዓሳ — Shimbra asa',
+              'ቀይ ምስር ወጥ — Key miser wet',
+              'አተር ወጥ — Ater wet',
+              'ድፍን ምስር — Difen misir',
+              'ድንች በካሮት — Dinch be carrot',
+              'አዚፋ — Azifa',
+              'ሩዝ በአትክልት — Ruz be atiklit',
+              'ጎመን ክትፎ — Gomen kitfo',
+              'የዓሳ ኮትሌት — Fish coutlate',
+              'የዓሳ ጉላሽ — Fish gulash'
+            ]
+          },
+          {
+            title: 'ሰላጣ (Salad)',
+            cols: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+            items: [
+              'ሚክስድ ሰላጣ — Mixed salad',
+              'ቱና ሰላጣ — Tuna salad',
+              'መካሮኒ ሰላጣ — Macaroni salad'
+            ]
+          },
+          {
+            title: 'ልዩ ምግቦች (Special Items)',
+            cols: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+            items: [
+              'ሱፍ ፍትፍት — Suf fitfit',
+              'ተልባ ፍትፍት — Telba fitfit',
+              'ቦሎቄ ፍትፍት — Boloke fitfit',
+              'ስኒግ ቃሪያ — Sinig karia',
+              'የተጠበሰ አትክልት — Fried vegetables'
+            ]
+          },
+          {
+            title: 'የተለመዱ ምግቦችና ዳቦዎች (Common Foods & Breads)',
+            cols: 'grid-cols-1 sm:grid-cols-2',
+            items: [
+              'እንጀራ — Enjera',
+              'ሀበሻ ዳቦ — Habesha bread'
+            ]
+          }
+        ]
+      },
+      {
+        id: 'fasting-normal',
+        tabTitle: 'የፆም ኖርማል ኬተሪንግ',
+        title: 'የፆም ኖርማል ኬተሪንግ (Ye Tsom Normal Catering)',
+        subtitle: 'ከለስላሳ መጠጥ ጋር ይቀርባል (Served with soft drinks)',
+        image: 'fasting-normal.png',
+        waText: 'ለዋጋ እና ትዕዛዝ - የፆም ኖርማል ኬተሪንግ',
+        sections: [
+          {
+            title: 'ዋና ዋና የምግብ አይነቶች (Main Dishes)',
+            cols: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+            items: [
+              'ሽምብራ ዓሳ — Shimbra asa',
+              'ቀይ ምስር ወጥ — Key miser wet',
+              'አተር ወጥ — Ater wet',
+              'ድፍን ምስር — Difen misir',
+              'ድንች በካሮት — Dinch be carrot',
+              'አዚፋ — Azifa',
+              'ሩዝ በአትክልት — Ruz be atiklit',
+              'ጎመን ክትፎ — Gomen kitfo'
+            ]
+          },
+          {
+            title: 'ሰላጣ (Salad)',
+            cols: 'grid-cols-1 sm:grid-cols-2',
+            items: [
+              'ሚክስድ ሰላጣ — Mixed salad',
+              'መካሮኒ ሰላጣ — Macaroni salad'
+            ]
+          },
+          {
+            title: 'ልዩ ምግቦች (Special Items)',
+            cols: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+            items: [
+              'ሱፍ ፍትፍት — Suf fitfit',
+              'ቦሎቄ ፍትፍት — Boloke fitfit',
+              'ስኒግ ቃሪያ — Sinig karia'
+            ]
+          },
+          {
+            title: 'የተለመዱ ምግቦችና ዳቦዎች (Common Foods & Breads)',
+            cols: 'grid-cols-1 sm:grid-cols-2',
+            items: [
+              'እንጀራ — Enjera',
+              'ሀበሻ ዳቦ — Habesha bread'
+            ]
+          }
+        ]
+      },
+      {
+        id: 'fosk-normal',
+        tabTitle: 'የፍስክ ኖርማል ኬተሪንግ',
+        title: 'የፍስክ ኖርማል ኬተሪንግ (Ye Fesek Normal Catering)',
+        subtitle: '',
+        image: 'fosk-normal.png',
+        waText: 'ለዋጋ እና ትዕዛዝ - የፍስክ ኖርማል ኬተሪንግ',
+        sections: [
+          {
+            title: 'ሰላጣ (Salads)',
+            cols: 'grid-cols-1 sm:grid-cols-2',
+            items: [
+              'መካሮኒ ሰላጣ — Macaroni salad',
+              'ሚክስድ ሰላጣ — Mixed salad'
+            ]
+          },
+          {
+            title: 'ዋና ዋና ምግቦች (Mains)',
+            cols: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+            items: [
+              'ምንቸት በቀይ — Menchet bekey',
+              'ምንቸት አልጫ — Menchet alicha',
+              'ዝልዝል ወጥ — Zilzil wet',
+              'ጎመን በስጋ — Gomen be siga',
+              'ትሪፖ — Tripa (ጨጓራ)',
+              { text: 'ዶሮ ወጥ — Doro wet', customClass: 'font-semibold' }
+            ]
+          },
+          {
+            title: 'የክትፎ ሜኑ (Kitfo Menu)',
+            cols: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+            items: [
+              'ጥሬ ክትፎ — Tire kitfo',
+              'የበሰለ ክትፎ — Ye besele kitfo',
+              'አይብ በነጭ — Ayib benech',
+              'አይብ በቀይ — Ayib be key',
+              'ጎመን ክትፎ — Gomen kitfo'
+            ]
+          },
+          {
+            title: 'አለም አቀፍ ምግቦች (International Foods)',
+            cols: 'grid-cols-1 sm:grid-cols-2',
+            items: [
+              'ሩዝ በስጋ — Rice with meat',
+              'የተጠበሰ ድንች — Fried potatoes'
+            ]
+          },
+          {
+            title: 'የተለመዱ ምግቦችና ዳቦዎች (Common Foods & Breads)',
+            cols: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
+            items: [
+              'ቆጮ — Kocho',
+              'እንጀራ — Enjera',
+              'ሀበሻ ዳቦ — Habesha bread',
+              'ተቆራጭ ዳቦ — Sliced bread'
+            ]
+          }
+        ]
+      },
+      {
+        id: 'fosk-special',
+        tabTitle: 'የፍስክ ስፔሻል ኬተሪንግ',
+        title: 'የፍስክ ስፔሻል ኬተሪንግ (Ye Fesek Special Catering)',
+        subtitle: '',
+        image: 'fosk-special.jpg',
+        waText: 'ለዋጋ እና ትዕዛዝ - የፍስክ ስፔሻል ኬተሪንግ',
+        sections: [
+          {
+            title: 'ሰላጣ (Salads)',
+            cols: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+            items: [
+              'ቱና ሰላጣ — Tuna salad',
+              'መካሮኒ ሰላጣ — Macaroni salad',
+              'ሚክስድ ሰላጣ — Mixed salad'
+            ]
+          },
+          {
+            title: 'ዋና ዋና ምግቦች (Mains)',
+            cols: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+            items: [
+              'ምንቸት በቀይ — Menchet bekey',
+              'ምንቸት አልጫ — Menchet alicha',
+              'ዝልዝል ወጥ — Zilzil wet',
+              'ጎመን በስጋ — Gomen be siga',
+              { text: 'ዶሮ ወጥ — Doro wet', customClass: 'font-semibold' },
+              'ጨጓራ / ትሪፓ — Tripa'
+            ]
+          },
+          {
+            title: 'የክትፎ ሜኑ (Kitfo Menu)',
+            cols: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
+            items: [
+              'ጥሬ ክትፎ — Tire kitfo',
+              'የበሰለ ክትፎ — Ye besele kitfo',
+              'ክትፎ ለብለብ — Kitfo lebleb',
+              'አይብ በነጭ — Ayib benech',
+              'አይብ በቀይ — Ayib be key',
+              'አይብ በጎመን — Ayib be gomen',
+              'ጎመን ክትፎ — Gomen kitfo'
+            ]
+          },
+          {
+            title: 'አለም አቀፍ ምግቦች (International Foods)',
+            cols: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+            items: [
+              'ሩዝ በስጋ — Rice with meat',
+              'የተጠበሰ ድንች — Fried potato',
+              'ሚት ቦል — Meat ball',
+              'ፓስታ አልፎርኖ — Pasta al fourno',
+              'የዓሳ ኮትሌት — Fish coutolet'
+            ]
+          },
+          {
+            title: 'ጣፋጭ ምግቦች (Desserts)',
+            cols: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
+            items: [
+              'ብላክ ፎረስት — Black forest',
+              'ዋይት ፎረስት — White forest',
+              'ኩኪስ — Cookies',
+              'ሚክስድ ፍሩትስ — Mixed fruits'
+            ]
+          },
+          {
+            title: 'የተለመዱ ምግቦችና ዳቦዎች (Common Foods & Breads)',
+            cols: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
+            items: [
+              'ቆጮ — Kocho',
+              'እንጀራ — Enjera',
+              'ሀበሻ ዳቦ — Habesha bread',
+              'ተቆራጭ ዳቦ — Sliced bread'
+            ]
+          }
+        ]
+      },
+      {
+        id: 'birthday-special',
+        tabTitle: 'የልደት ስፔሻል ኬተሪንግ',
+        title: 'የልደት ስፔሻል ኬተሪንግ (Birthday Special Catering)',
+        subtitle: 'ለልደትና ለተለያዩ ድግሶች የተዘጋጀ ልዩ ፓኬጅ (Special Package for Birthdays & Celebrations)',
+        image: 'birthday-special.png',
+        waText: 'ለዋጋ እና ትዕዛዝ - የልደት ስፔሻል ኬተሪንግ',
+        sections: [
+          {
+            title: 'ፈጣንና ቀላል ምግቦች (Finger Foods & Snacks)',
+            cols: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+            items: [
+              'ሚኒ በርገር — Mini Burgers',
+              'ክላብ ሳንድዊች — Club Sandwich',
+              'የዶሮ ዊንግስ — Chicken Wings',
+              'የዓሳ / የዶሮ ስቲክ — Fish/Chicken Sticks',
+              'ፒዛ ስላይስ — Pizza Slices',
+              'ስፕሪንግ ሮል — Spring Rolls'
+            ]
+          },
+          {
+            title: 'ዋና ዋና ምግቦች (Main Dishes)',
+            cols: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+            items: [
+              'ፍራይድ ራይስ — Fried Rice',
+              'ፓስታ አልፎርኖ — Pasta al Fourno',
+              'የዶሮ ስሊቨር — Chicken Cutlet/Sliver',
+              'የበሬ ጥብስ — Beef Tibs',
+              'መካሮኒ ሰላጣ — Macaroni Salad',
+              'ሚክስድ ሰላጣ — Mixed Salad'
+            ]
+          },
+          {
+            title: 'ጣፋጭ ምግቦችና መጠጦች (Desserts & Drinks)',
+            cols: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+            items: [
+              'የልደት ኬክ — Birthday Cake',
+              'ሚኒ ካፕ ኬክ — Cupcakes',
+              'ሚክስድ ፍሩትስ — Mixed Fresh Fruits',
+              'ለስላሳ መጠጦች — Soft Drinks',
+              'የፍራፍሬ ጁስ — Fresh Fruit Juice'
+            ]
+          }
+        ]
+      },
+      {
+        id: 'kitfo-menu',
+        tabTitle: 'ክትፎ',
+        title: 'የክትፎ ሜኑ (Ye Kitfo Menu Catering)',
+        subtitle: '',
+        image: 'kitfo.jpg',
+        waText: 'ለዋጋ እና ትዕዛዝ - የክትፎ ሜኑ',
+        sections: [
+          {
+            title: 'የክትፎ ሜኑ (Kitfo Menu)',
+            cols: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+            items: [
+              'ጥሬ ክትፎ — Tire kitfo',
+              'የበሰለ ክትፎ — Ye besele kitfo',
+              'ክትፎ ለብለብ — Kitfo leb leb',
+              'አይብ በነጭ — Ayib benech',
+              'አይብ በቀይ — Ayib be key',
+              'ካሽዬ (ጎመን በ አይብ) — Kashye',
+              'የምብር (ጎመን ክትፎ) — Yember',
+              'ክትፎ በቆጮ — Kitfo be kocho',
+              'ጭኮ — Chiko',
+              'ጎመን በስጋ — Gomen be siga'
+            ]
+          },
+          {
+            title: 'የተለመዱ ምግቦች (Common Foods)',
+            cols: 'grid-cols-1 sm:grid-cols-3',
+            items: [
+              'ቆጮ — Kocho',
+              'እንጀራ — Enjera',
+              'ሀበሻ ዳቦ — Habesha bread'
+            ]
+          },
+          {
+            title: 'ባህላዊ መጠጦች (Traditional Drinks)',
+            cols: 'grid-cols-1 sm:grid-cols-3',
+            items: [
+              'ጠጅ — Tej'
+            ]
+          }
+        ]
+      },
+      {
+        id: 'doro-wet',
+        tabTitle: 'ዶሮ ወጥ',
+        title: 'ዶሮ ወጥ (Traditional Doro Wet Special)',
+        subtitle: 'በሀገር ባህል ቅመም እና በሚጥሚጣ በደንብ የበሰለ (Authentic Ethiopian Chicken Stew)',
+        image: 'doro.jpg',
+        waText: 'ለዋጋ እና ትዕዛዝ - ዶሮ ወጥ',
+        sections: [
+          {
+            title: 'የዶሮ ወጥ ማዕድ (Doro Wet Dish Details)',
+            cols: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+            items: [
+              'የሀገር ዶሮ (12 ክፍል) — Local Hen (12 Cut Pieces)',
+              'የተቀቀለ እንቁላል — Hard-boiled Eggs (12 pcs)',
+              'በቅመም የተነጠረ ቅቤ — Spiced Kibbeh Flavor',
+              'ልዩ የሀበሻ በርበሬ — Rich Ethiopian Berbere Sauce',
+              'እንጀራ ይካተታል — Served with Fresh Enjera'
+            ]
+          }
+        ]
+      },
+      {
+        id: 'tsom-agelgel',
+        tabTitle: 'የፆም አገልግል',
+        title: 'የፆም አገልግል (Ye Tsom Agelgel)',
+        subtitle: 'በዕቃ የተዘጋጀ ባህላዊ የፆም ምግቦች ስብስብ (Fasting Agelgel Combo)',
+        image: 'tsom-agelgel.jpg',
+        waText: 'ለዋጋ እና ትዕዛዝ - የፆም አገልግል',
+        sections: [
+          {
+            title: 'የአገልግል ማዕድ (Agelgel Dish Details)',
+            cols: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+            items: [
+              'ሽምብራ ዓሳ — Shimbra asa',
+              'ቀይ ምስር ወጥ — Key miser wet',
+              'አተር ወጥ — Ater wet',
+              'ድንች በካሮት — Dinch be carrot',
+              'አዚፋ — Azifa',
+              'እንጀራ — Enjera'
+            ]
+          }
+        ]
+      },
+      {
+        id: 'fesek-special-agelgel',
+        tabTitle: 'የፍስክ ስፔሻል አገልግል',
+        title: 'የፍስክ ስፔሻል አገልግል (Ye Fesek Special Agelgel)',
+        subtitle: 'ልዩ ልዩ የፍስክ ምግቦች ስብስብ (Special Non-Fasting Agelgel Combo)',
+        image: 'fesek-special-agelgel.jpg',
+        waText: 'ለዋጋ እና ትዕዛዝ - የፍስክ ስፔሻል አገልግል',
+        sections: [
+          {
+            title: 'የስፔሻል አገልግል ማዕድ (Special Agelgel Details)',
+            cols: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+            items: [
+              'ምንቸት በቀይ — Menchet bekey',
+              'ምንቸት አልጫ — Menchet alicha',
+              'ዝልዝል ወጥ — Zilzil wet',
+              'ዶሮ ወጥ — Doro wet',
+              'ክትፎ — Kitfo',
+              'አይብ — Ayib',
+              'እንጀራ — Enjera'
+            ]
+          }
+        ]
+      },
+      {
+        id: 'fesek-normal-agelgel',
+        tabTitle: 'የፍስክ ኖርማል አገልግል',
+        title: 'የፍስክ ኖርማል አገልግል (Ye Fesek Normal Agelgel)',
+        subtitle: 'የተለመዱ የፍስክ ምግቦች ስብስብ (Normal Non-Fasting Agelgel Combo)',
+        image: 'fesek-normal-agelgel.jpg',
+        waText: 'ለዋጋ እና ትዕዛዝ - የፍስክ ኖርማል አገልግል',
+        sections: [
+          {
+            title: 'የኖርማል አገልግል ማዕድ (Normal Agelgel Details)',
+            cols: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+            items: [
+              'ምንቸት በቀይ — Menchet bekey',
+              'ምንቸት አልጫ — Menchet alicha',
+              'ጎመን በስጋ — Gomen be siga',
+              'እንጀራ — Enjera'
+            ]
+          }
+        ]
+      },
+      {
+        id: 'habesha-dabo',
+        tabTitle: 'ሀበሻ ዳቦ',
+        title: 'ሀበሻ ዳቦ (Habesha Dabo)',
+        subtitle: 'በባህላዊ መንገድ የተጋገረ ትኩስ የሀበሻ ዳቦ (Traditional Ethiopian Bread)',
+        image: 'habesha-dabo.png',
+        waText: 'ለዋጋ እና ትዕዛዝ - ሀበሻ ዳቦ',
+        featureCard: {
+          title: 'ትኩስ የሀበሻ ዳቦ (Fresh Habesha Dabo)',
+          subtext: 'ለተለያዩ ፕሮግራሞች እና ለቤት ውስጥ ፍጆታ የሚሆን ባህላዊ ዳቦ።'
+        }
+      },
+      {
+        id: 'baltena',
+        tabTitle: 'ባልትና (Baltena)',
+        title: 'ባልትና (Baltena Products)',
+        subtitle: '',
+        description: 'በንፅህና የተዘጋጁ ባህላዊ የባልትና ውጤቶች።',
+        image: 'baltena.jpg',
+        waText: 'ለዋጋ እና ትዕዛዝ - ባልትና',
+        cardItems: [
+          'ንጹህ በርበሬ',
+          'ልዩ የሽሮ ዱቄት',
+          'ንጹህ ሚጥሚጣ',
+          'የጥብስ / የኬሪ ቅመሞች',
+          'የመከለሻ ቅመም'
+        ]
+      },
+      {
+        id: 'chicken',
+        tabTitle: 'የተበለተ ዶሮ',
+        title: 'የተበለተ ዶሮ (Cleaned & Processed Chicken)',
+        subtitle: '',
+        description: 'በጥንቃቄ እና በንፅህና የተበለተና ለምግብ ዝግጅት የተዘጋጀ የሀገር ዶሮ።',
+        image: 'chicken.jpg',
+        waText: 'ለዋጋ እና ትዕዛዝ - የተበለተ ዶሮ',
+        featureCard: {
+          title: 'የተበለተ የሀገር ዶሮ (Cleaned Local Hen)',
+          subtext: 'ለዶሮ ወጥ በ12 ክፍል ተቆራርጦና ተነጥሮ የተሰናዳ።'
+        }
+      },
+      {
+        id: 'ghee',
+        tabTitle: 'የተነጠረ ቅቤ',
+        title: 'የተነጠረ ቅቤ (Traditional Clarified Butter)',
+        subtitle: '',
+        description: 'በባህላዊ ቅመማ ቅመሞች በደንብ የተነጠረ የሀገር ውስጥ ለጋ ቅቤ።',
+        image: 'ghee.jpg',
+        waText: 'ለዋጋ እና ትዕዛዝ - የተነጠረ ቅቤ',
+        featureCard: {
+          title: 'በቅመም የተነጠረ ቅቤ (Spiced Niter Kibbeh)',
+          subtext: 'ለክትፎ፣ ለዶሮ ወጥ እና ለተለያዩ ባህላዊ ምግቦች የሚሆን።'
+        }
+      }
+    ];
+
+    const ACTIVE_CLASSES = [
+      'bg-orange-800', 'text-white', 'shadow-lg', 'border-orange-900',
+      'dark:bg-orange-700', 'dark:text-white', 'dark:border-orange-600'
+    ];
+    const INACTIVE_CLASSES = [
+      'bg-white', 'text-gray-800', 'shadow-sm', 'border-orange-200',
+      'hover:bg-orange-50', 'dark:bg-black', 'dark:text-orange-300',
+      'dark:border-orange-950', 'dark:hover:bg-orange-950/60'
+    ];
+
+    let currentTabId = menuData[0].id;
+    let searchTerm = '';
+
+    function escapeHTML(value) {
+      const div = document.createElement('div');
+      div.textContent = value;
+      return div.innerHTML;
+    }
+
+    function normalizeText(value) {
+      return String(value)
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+    }
+
+    function itemToText(item) {
+      return typeof item === 'object' ? item.text : item;
+    }
+
+    function getMenuSearchText(menu) {
+      const searchableParts = [menu.tabTitle, menu.title, menu.subtitle, menu.description];
+      if (menu.sections) {
+        menu.sections.forEach(section => {
+          searchableParts.push(section.title);
+          section.items.forEach(item => searchableParts.push(itemToText(item)));
+        });
+      }
+      if (menu.cardItems) {
+        searchableParts.push(...menu.cardItems);
+      }
+      if (menu.featureCard) {
+        searchableParts.push(menu.featureCard.title, menu.featureCard.subtext);
+      }
+      return normalizeText(searchableParts.filter(Boolean).join(' '));
+    }
+
+    function menuMatchesSearch(menu, query) {
+      if (!query) return true;
+      return getMenuSearchText(menu).includes(normalizeText(query));
+    }
+
+    function sectionHasMatches(section) {
+      if (!searchTerm) return true;
+      return section.items.some(item => {
+        return normalizeText(itemToText(item)).includes(normalizeText(searchTerm));
+      });
+    }
+
+    function renderTabs() {
+      const tabContainer = document.getElementById('tab-container');
+      tabContainer.innerHTML = '';
+
+      menuData.forEach(menu => {
+        const matches = menuMatchesSearch(menu, searchTerm);
+        const btn = document.createElement('button');
+        btn.id = `tab-${menu.id}`;
+        btn.type = 'button';
+        btn.setAttribute('role', 'tab');
+        btn.setAttribute('aria-selected', currentTabId === menu.id ? 'true' : 'false');
+        btn.setAttribute('aria-controls', `content-${menu.id}`);
+        btn.tabIndex = currentTabId === menu.id ? 0 : -1;
+        btn.dataset.tabId = menu.id;
+        btn.className = `menu-tab px-4 py-3 rounded-xl border font-bold text-xs sm:text-sm transition-all duration-200 cursor-pointer ${currentTabId === menu.id ? ACTIVE_CLASSES.join(' ') : INACTIVE_CLASSES.join(' ')} ${matches ? '' : 'opacity-40'}`;
+        btn.textContent = menu.tabTitle;
+        btn.addEventListener('click', () => switchTab(menu.id));
+        tabContainer.appendChild(btn);
+      });
+    }
+
+    function renderMenuContent() {
+      const contentContainer = document.getElementById('content-container');
+      contentContainer.innerHTML = '';
+
+      menuData.forEach(menu => {
+        const panel = document.createElement('section');
+        panel.id = `content-${menu.id}`;
+        panel.setAttribute('role', 'tabpanel');
+        panel.setAttribute('aria-labelledby', `tab-${menu.id}`);
+        panel.tabIndex = 0;
+        panel.className = `menu-content ${currentTabId === menu.id ? '' : 'hidden'}`;
+        panel.innerHTML = buildMenuHTML(menu);
+        contentContainer.appendChild(panel);
+      });
+
+      setupImageFallbacks();
+    }
+
+    function buildMenuHTML(menu) {
+      let sectionsHTML = '';
+
+      if (menu.sections) {
+        const visibleSections = menu.sections.filter(sectionHasMatches);
+
+        if (searchTerm && menuMatchesSearch(menu, searchTerm) && visibleSections.length === 0) {
+          sectionsHTML = `
+            <div class="no-results text-center py-12">
+              <div class="text-5xl mb-4">🍽️</div>
+              <h3 class="text-xl font-extrabold text-orange-950 dark:text-orange-300">
+                ምንም ውጤት አልተገኘም
+              </h3>
+              <p class="mt-2 text-sm text-gray-500 dark:text-orange-200/60">
+                No matching food was found in this category.
+              </p>
+            </div>
+          `;
+        } else {
+          sectionsHTML = `
+            <div class="space-y-8">
+              ${visibleSections.map((section, sectionIndex) => {
+                const matchingItems = section.items.filter(item => {
+                  if (!searchTerm) return true;
+                  return normalizeText(itemToText(item)).includes(normalizeText(searchTerm));
+                });
+
+                return `
+                  <section class="animate-fade-up" style="animation-delay:${sectionIndex * 60}ms">
+                    <div class="flex items-center gap-3 mb-4">
+                      <span class="w-1.5 h-7 rounded-full bg-orange-800 dark:bg-orange-500"></span>
+                      <h3 class="text-lg sm:text-xl font-extrabold text-orange-950 dark:text-orange-300">
+                        ${escapeHTML(section.title)}
+                      </h3>
+                    </div>
+                    <div class="grid ${section.cols} gap-3">
+                      ${matchingItems.map(item => {
+                        const text = itemToText(item);
+                        const customClass = typeof item === 'object' ? item.customClass || '' : '';
+                        return `
+                          <div class="menu-card p-4 min-h-[70px] flex items-center ${customClass}">
+                            <div class="flex items-start gap-3">
+                              <span class="mt-1.5 w-2 h-2 flex-shrink-0 rounded-full bg-orange-700 dark:bg-orange-500"></span>
+                              <span class="font-semibold text-sm sm:text-base leading-6 text-gray-800 dark:text-orange-100">
+                                ${escapeHTML(text)}
+                              </span>
+                            </div>
+                          </div>
+                        `;
+                      }).join('')}
+                    </div>
+                  </section>
+                `;
+              }).join('')}
+            </div>
+          `;
+        }
+      } else if (menu.cardItems) {
+        sectionsHTML = `
+          ${menu.description ? `<p class="text-gray-600 dark:text-orange-200/80 mb-7 leading-7">${escapeHTML(menu.description)}</p>` : ''}
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            ${menu.cardItems.map((item, index) => `
+              <div class="menu-card p-5 text-center animate-fade-up" style="animation-delay:${index * 70}ms">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-orange-100 dark:bg-orange-950 text-orange-800 dark:text-orange-400 mb-3 font-bold">
+                  ${index + 1}
+                </span>
+                <span class="font-bold text-orange-950 dark:text-orange-300 block text-base sm:text-lg">
+                  ${escapeHTML(item)}
+                </span>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      } else if (menu.featureCard) {
+        sectionsHTML = `
+          ${menu.description ? `<p class="text-gray-600 dark:text-orange-200/80 mb-7 leading-7">${escapeHTML(menu.description)}</p>` : ''}
+          <div class="grid grid-cols-1 gap-4">
+            <div class="menu-card p-6 sm:p-7 animate-fade-up">
+              <div class="flex flex-col sm:flex-row sm:items-center gap-5">
+                <div class="w-14 h-14 rounded-2xl bg-orange-100 dark:bg-orange-950 flex items-center justify-center text-2xl animate-float">
+                  ✦
+                </div>
+                <div>
+                  <span class="font-extrabold text-orange-950 dark:text-orange-300 block text-lg sm:text-xl mb-2">
+                    ${escapeHTML(menu.featureCard.title)}
+                  </span>
+                  <p class="text-sm sm:text-base text-gray-600 dark:text-orange-200/70 leading-7">
+                    ${escapeHTML(menu.featureCard.subtext)}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="menu-image-wrapper rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl mb-7 group">
+          <img src="${escapeHTML(menu.image)}" alt="${escapeHTML(menu.tabTitle)}" class="menu-image" loading="lazy" decoding="async" width="1600" height="900">
+          <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"></div>
+          <div class="absolute left-4 bottom-4 px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-white text-xs font-bold">
+            ${escapeHTML(menu.tabTitle)}
+          </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-5 border-b border-orange-200 dark:border-orange-950 pb-6 mb-7">
+          <div class="min-w-0">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-orange-950 dark:text-orange-300 leading-tight">
+              ${escapeHTML(menu.title)}
+            </h2>
+            ${menu.subtitle ? `<p class="mt-2 text-xs sm:text-sm text-orange-800 dark:text-orange-400 font-medium leading-6">${escapeHTML(menu.subtitle)}</p>` : ''}
+          </div>
+          <a href="https://wa.me/251934844547?text=${encodeURIComponent(menu.waText)}" target="_blank" rel="noopener noreferrer" class="flex-shrink-0 w-full lg:w-auto inline-flex justify-center items-center gap-2 bg-orange-800 hover:bg-orange-700 dark:bg-orange-700 dark:hover:bg-orange-600 text-white font-extrabold px-5 py-3.5 rounded-full text-sm shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5 active:scale-95">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12.04 2C6.51 2 2.02 6.49 2.02 12.02c0 1.77.46 3.43 1.27 4.87L2 22l5.25-1.27a9.97 9.97 0 004.79 1.22h.01c5.53 0 10.02-4.49 10.02-10.02C22.07 6.49 17.57 2 12.04 2zm5.85 14.36c-.25.7-1.23 1.28-1.69 1.36-.43.08-.97.11-1.57-.1-.36-.12-.82-.27-1.41-.52-2.48-1.07-4.1-3.55-4.22-3.72-.12-.17-1.01-1.34-1.01-2.55 0-1.21.64-1.8.87-2.05.23-.25.5-.31.66-.31h.48c.15 0 .36-.06.56.43.2.48.69 1.68.75 1.81.06.12.1.27.02.44-.08.17-.12.27-.25.42-.12.15-.26.33-.37.44-.12.12-.25.25-.11.49.14.24.62 1.03 1.34 1.67.92.82 1.7 1.08 1.94 1.2.24.12.38.1.52-.06.14-.16.59-.69.75-.93.16-.24.32-.2.54-.12.22.08 1.41.66 1.65.78.24.12.4.18.46.28.06.1.06.57-.19 1.27z"/>
+            </svg>
+            ዋጋ ለመጠየቅና ለማዘዝ
+          </a>
+        </div>
+
+        ${sectionsHTML}
+      `;
+    }
+
+    function switchTab(targetId, updateHash = true) {
+      const targetMenu = menuData.find(menu => menu.id === targetId);
+      if (!targetMenu) return;
+
+      currentTabId = targetId;
+
+      document.querySelectorAll('.menu-content').forEach(panel => {
+        panel.classList.toggle('hidden', panel.id !== `content-${targetId}`);
+      });
+
+      document.querySelectorAll('.menu-tab').forEach(tab => {
+        const isActive = tab.dataset.tabId === targetId;
+        tab.classList.remove(...ACTIVE_CLASSES, ...INACTIVE_CLASSES);
+        tab.classList.add(...(isActive ? ACTIVE_CLASSES : INACTIVE_CLASSES));
+        tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        tab.tabIndex = isActive ? 0 : -1;
+      });
+
+      const activeTab = document.getElementById(`tab-${targetId}`);
+      if (activeTab) {
+        activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+
+      updateSearchStatus();
+
+      if (updateHash && history.replaceState) {
+        history.replaceState(null, '', `#${targetId}`);
+      }
+    }
+
+    function performSearch() {
+      searchTerm = document.getElementById('searchInput').value.trim();
+
+      const matchingMenus = menuData.filter(menu => menuMatchesSearch(menu, searchTerm));
+      const currentMenu = menuData.find(menu => menu.id === currentTabId);
+
+      if (searchTerm && currentMenu && !menuMatchesSearch(currentMenu, searchTerm) && matchingMenus.length) {
+        currentTabId = matchingMenus[0].id;
+      }
+
+      renderTabs();
+      renderMenuContent();
+      updateSearchStatus();
+    }
+
+    function updateSearchStatus() {
+      const status = document.getElementById('searchStatus');
+      if (!searchTerm) {
+        status.classList.add('hidden');
+        return;
+      }
+
+      const matchingMenus = menuData.filter(menu => menuMatchesSearch(menu, searchTerm));
+      if (!matchingMenus.length) {
+        status.textContent = 'ምንም ውጤት አልተገኘም / No results found.';
+      } else {
+        const categoryText = matchingMenus.length === 1 ? 'category' : 'categories';
+        status.textContent = `${matchingMenus.length} ምድብ ተገኝቷል / ${matchingMenus.length} ${categoryText} found`;
+      }
+      status.classList.remove('hidden');
+    }
+
+    function setupImageFallbacks() {
+      document.querySelectorAll('.menu-image').forEach(img => {
+        img.addEventListener('error', function () {
+          if (this.dataset.fallbackShown) return;
+          this.dataset.fallbackShown = 'true';
+          this.style.display = 'none';
+
+          const parent = this.parentElement;
+          parent.classList.add('flex', 'items-center', 'justify-center');
+
+          const message = document.createElement('div');
+          message.className = 'text-center text-orange-800 dark:text-orange-400 font-bold px-6';
+          message.innerHTML = `
+            <div class="text-4xl mb-2">🍽️</div>
+            <div>Firut Catering</div>
+          `;
+          parent.appendChild(message);
+        }, { once: true });
+      });
+    }
+
+    function getPreferredTheme() {
+      const saved = localStorage.getItem('firut-theme');
+      if (saved === 'dark' || saved === 'light') return saved;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function applyTheme(theme) {
+      const isDark = theme === 'dark';
+      document.documentElement.classList.toggle('dark', isDark);
+      localStorage.setItem('firut-theme', theme);
+
+      const icon = document.getElementById('themeIcon');
+      const text = document.getElementById('themeText');
+      if (isDark) {
+        icon.textContent = '☀️';
+        text.textContent = 'Light Mode';
+      } else {
+        icon.textContent = '🌙';
+        text.textContent = 'Dark Mode';
+      }
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.contains('dark');
+      applyTheme(isDark ? 'light' : 'dark');
+    }
+
+    function loadHashTab() {
+      const hash = window.location.hash.replace('#', '');
+      if (menuData.some(menu => menu.id === hash)) {
+        currentTabId = hash;
+      }
+    }
+
+    function setupBackToTop() {
+      const button = document.getElementById('backToTop');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+          button.classList.add('show');
+        } else {
+          button.classList.remove('show');
+        }
+      }, { passive: true });
+
+      button.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    function setupKeyboardNavigation() {
+      const tabContainer = document.getElementById('tab-container');
+      tabContainer.addEventListener('keydown', event => {
+        const tabs = [...document.querySelectorAll('.menu-tab')];
+        if (!tabs.length) return;
+
+        const currentIndex = tabs.findIndex(tab => tab.dataset.tabId === currentTabId);
+        let nextIndex = currentIndex;
+
+        if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % tabs.length;
+        if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+        if (event.key === 'Home') nextIndex = 0;
+        if (event.key === 'End') nextIndex = tabs.length - 1;
+
+        if (event.key === 'Enter' || event.key === ' ') {
+          const focused = document.activeElement;
+          if (focused && focused.classList.contains('menu-tab')) {
+            event.preventDefault();
+            switchTab(focused.dataset.tabId);
+          }
+          return;
+        }
+
+        if (nextIndex !== currentIndex) {
+          event.preventDefault();
+          tabs[nextIndex].focus();
+          switchTab(tabs[nextIndex].dataset.tabId);
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      applyTheme(getPreferredTheme());
+      loadHashTab();
+      renderTabs();
+      renderMenuContent();
+
+      const searchInput = document.getElementById('searchInput');
+      const clearSearch = document.getElementById('clearSearch');
+
+      searchInput.addEventListener('input', () => {
+        clearSearch.classList.toggle('hidden', !searchInput.value);
+        performSearch();
+      });
+
+      clearSearch.addEventListener('click', () => {
+        searchInput.value = '';
+        clearSearch.classList.add('hidden');
+        performSearch();
+        searchInput.focus();
+      });
+
+      document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+      document.getElementById('browseMenuBtn').addEventListener('click', () => {
+        document.getElementById('menuArea').scrollIntoView({ behavior: 'smooth' });
+      });
+
+      setupBackToTop();
+      setupKeyboardNavigation();
+    });
+  </script>
+</body>
+</html>
